@@ -9,14 +9,14 @@ const request_blog_backend = () => {
 	axios
 		.get(`${process.env.BLOG_WEBSITE_BACKEND}/activate`)
 		.then((response) => {
-			console.log(response);
+			console.log(response.data);
 		})
 		.catch((error) => {
 			console.log(error);
 		});
 };
 
-cron.schedule("0 */4 * * *", () => {
+cron.schedule("*/10 * * * *", () => {
 	console.log("running a task every 4 minutes");
 	request_blog_backend();
 });
