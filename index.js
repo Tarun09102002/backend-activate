@@ -5,8 +5,7 @@ const port = process.env.PORT || 3000;
 const cron = require("node-cron");
 const axios = require("axios");
 
-cron.schedule("*/4 * * *", () => {
-	console.log("running a task every 4 minutes");
+const request_blog_backend = () => {
 	axios
 		.get(`${process.env.BLOG_WEBSITE_BACKEND}/activate`)
 		.then((response) => {
@@ -15,6 +14,11 @@ cron.schedule("*/4 * * *", () => {
 		.catch((error) => {
 			console.log(error);
 		});
+};
+
+cron.schedule("0 */4 * * *", () => {
+	console.log("running a task every 4 minutes");
+	request_blog_backend();
 });
 
 app.get("/", (req, res) => {
